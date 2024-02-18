@@ -71,6 +71,10 @@ flutter:
     - assets/images/chi.jpg
     - assets/images/c.jpg
     - assets/images/soop.jpg
+    - assets/images/logo.png
+    - assets/images/first.jpg
+    - assets/images/sec.jpg
+    - assets/images/third.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

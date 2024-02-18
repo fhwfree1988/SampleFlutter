@@ -91,6 +91,8 @@ class _MyApp extends State<MyHomePage> {
   ];
 
   int _selectedIndex = 0;
+  bool isDark = true;
+
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -120,18 +122,154 @@ class _MyApp extends State<MyHomePage> {
    /* final image = Image.asset(exampleImagePath, key: _imageKey);
     // Yes, we call this every time the widget rebuilds, so we update our understanding of the image size.
     WidgetsBinding.instance.addPostFrameCallback(_updateImageSize);*/
+    final ThemeData themeData = ThemeData(
+        useMaterial3: true,
+        brightness: isDark ? Brightness.dark : Brightness.light);
 
     return MaterialApp(
+      theme: themeData,
       home: Scaffold(
         backgroundColor: Color.fromRGBO(61, 61, 61, 1.0),
         appBar: AppBar(
-          shape: Border(
+          toolbarHeight: 120,
+          shape: const Border(
               bottom: BorderSide(
                   color: Colors.orange,
                   width: 4
               )
           ),
-          title: Text('Shop Page'),
+          bottom: PreferredSize(
+              preferredSize: Size.fromHeight(50),
+              child:Container(
+                color: Colors.transparent, // set your color
+                child: Column(
+                  children: [
+                   /* Text("data"), // set an icon or image
+                    IconButton(
+                        icon: Icon(Icons.search),
+                        onPressed: () {})*/
+                    SearchAnchor(
+                        builder: (BuildContext context, SearchController controller) {
+                          return SearchBar(
+                            controller: controller,
+                            padding: const MaterialStatePropertyAll<EdgeInsets>(
+                                EdgeInsets.symmetric(horizontal: 16.0)),
+                            onTap: () {
+                              controller.openView();
+                            },
+                            onChanged: (_) {
+                              controller.openView();
+                            },
+                            leading: const Icon(Icons.search),
+                            trailing: <Widget>[
+                              Tooltip(
+                                message: 'Change brightness mode',
+                                child: IconButton(
+                                  isSelected: isDark,
+                                  onPressed: () {
+                                    setState(() {
+                                      isDark = !isDark;
+                                    });
+                                  },
+                                  icon: const Icon(Icons.wb_sunny_outlined),
+                                  selectedIcon: const Icon(Icons.brightness_2_outlined),
+                                ),
+                              )
+                            ],
+                          );
+                        }, suggestionsBuilder:
+                        (BuildContext context, SearchController controller) {
+                      return List<ListTile>.generate(5, (int index) {
+                        final String item = 'item $index';
+                        return ListTile(
+                          title: Text(item),
+                          onTap: () {
+                            setState(() {
+                              controller.closeView(item);
+                            });
+                          },
+                        );
+                      });
+                    }),// set your search bar setting
+                  ],
+                ),
+              )),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              /*ClipRRect(
+                *//*borderRadius: BorderRadius.circular(75.0),*//*
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  bottomRight:Radius.circular(15),
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                ),
+                child: Image.asset(
+                  'assets/images/sec.jpg',
+                  fit: BoxFit.contain,
+                  height: 80,
+                ),
+              ),
+              SizedBox(width: 30.0),
+              ClipRRect(
+                *//*borderRadius: BorderRadius.circular(75.0),*//*
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  bottomRight:Radius.circular(15),
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                ),
+                child: Image.asset(
+                  'assets/images/first.jpg',
+                  fit: BoxFit.contain,
+                  height: 80,
+                ),
+              ),
+              SizedBox(width: 30.0),*/
+              Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(boxShadow: const [
+                  BoxShadow(
+                    color: Colors.orange,
+                    blurRadius: 10.0,
+                    spreadRadius: 0.0,
+                    offset: Offset(
+                        0.0, 0.0), // shadow direction: bottom right
+                  )
+                ], borderRadius: BorderRadius.circular(20)),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.asset(
+                    'assets/images/third.jpg',
+                    fit: BoxFit.contain,
+                    height: 80,
+                  ),
+                ),
+              ),
+              Container(
+                  padding: const EdgeInsets.all(8.0), child: Text('Shop Page'))
+            ],
+
+          ),
+          shadowColor: Color.fromRGBO(126, 64, 0, 1.0),
+          actions: [
+            IconButton(
+              onPressed: () {
+
+              },
+              icon: Icon(Icons.search),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.call),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.more_vert),
+            ),
+          ],
           foregroundColor: Color.fromRGBO(255, 255, 255, 1.0),
           backgroundColor: Color.fromRGBO(14, 0, 0, 1.0),
         ),
@@ -153,7 +291,7 @@ class _MyApp extends State<MyHomePage> {
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Color.fromRGBO(121, 0, 0, 1.0),
                 ),
                 child: Text('Drawer Header'),
               ),
@@ -190,6 +328,28 @@ class _MyApp extends State<MyHomePage> {
             ],
           ),
         ),
+        /*bottomSheet:Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/logo.png',
+              fit: BoxFit.contain,
+              height: 80,
+            ),
+            Container(
+                padding: const EdgeInsets.all(8.0), child: Text('Shop Page'))
+          ],
+
+        ),*/
+        bottomNavigationBar: Container(
+            color: Colors.brown,
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'assets/images/logo.png',
+              fit: BoxFit.contain,
+              height: 80,
+            ),/*Text('Shop Page')*/
+        )
       ),
     );
   }
