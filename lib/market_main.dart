@@ -91,8 +91,8 @@ class _MyApp extends State<MyHomePage> {
   ];
 
   int _selectedIndex = 0;
-  bool isDark = true;
-
+  bool _isSearchOff = true;
+  bool _isDark = true;
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -115,7 +115,11 @@ class _MyApp extends State<MyHomePage> {
       _selectedIndex = index;
     });
   }
-
+  void _toggleSearch() {
+    setState(() {
+      _isSearchOff = !_isSearchOff;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     MediaQuery.of(context); // Trigger rebuild when window is resized. This updates the bounding box sizes.
@@ -124,7 +128,7 @@ class _MyApp extends State<MyHomePage> {
     WidgetsBinding.instance.addPostFrameCallback(_updateImageSize);*/
     final ThemeData themeData = ThemeData(
         useMaterial3: true,
-        brightness: isDark ? Brightness.dark : Brightness.light);
+        brightness: _isDark ? Brightness.dark : Brightness.light);
 
     return MaterialApp(
       theme: themeData,
@@ -138,8 +142,8 @@ class _MyApp extends State<MyHomePage> {
                   width: 4
               )
           ),
-          bottom: PreferredSize(
-              preferredSize: Size.fromHeight(50),
+          bottom: _isSearchOff? null : PreferredSize(
+              preferredSize: Size.fromHeight(30),
               child:Container(
                 color: Colors.transparent, // set your color
                 child: Column(
@@ -153,7 +157,7 @@ class _MyApp extends State<MyHomePage> {
                           return SearchBar(
                             controller: controller,
                             padding: const MaterialStatePropertyAll<EdgeInsets>(
-                                EdgeInsets.symmetric(horizontal: 16.0)),
+                                EdgeInsets.symmetric(horizontal: 20.0)),
                             onTap: () {
                               controller.openView();
                             },
@@ -165,14 +169,15 @@ class _MyApp extends State<MyHomePage> {
                               Tooltip(
                                 message: 'Change brightness mode',
                                 child: IconButton(
-                                  isSelected: isDark,
+                                  /*isSelected: _isDark,
                                   onPressed: () {
                                     setState(() {
-                                      isDark = !isDark;
+                                      _isDark = !_isDark;
                                     });
-                                  },
-                                  icon: const Icon(Icons.wb_sunny_outlined),
-                                  selectedIcon: const Icon(Icons.brightness_2_outlined),
+                                  },*/
+                                  onPressed: () {  },
+                                  icon: const Icon(Icons.add_alert),
+                                  //selectedIcon: const Icon(Icons.brightness_2_outlined),
                                 ),
                               )
                             ],
@@ -242,14 +247,27 @@ class _MyApp extends State<MyHomePage> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Image.asset(
-                    'assets/images/third.jpg',
+                    'assets/images/mylog.jpg',
                     fit: BoxFit.contain,
                     height: 80,
                   ),
                 ),
               ),
               Container(
-                  padding: const EdgeInsets.all(8.0), child: Text('Shop Page'))
+                width: 200,
+                height: 80,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.asset(
+                    'assets/images/textlogo.jpg',
+                    fit: BoxFit.contain,
+                    height: 100,
+                    width: 300,
+                  ),
+                ),
+              ),
+              /*Container(
+                  padding: const EdgeInsets.all(8.0), child: Text('Shop Page'))*/
             ],
 
           ),
@@ -257,14 +275,23 @@ class _MyApp extends State<MyHomePage> {
           actions: [
             IconButton(
               onPressed: () {
-
+                _toggleSearch();
               },
               icon: Icon(Icons.search),
             ),
-            IconButton(
+            /*IconButton(
               onPressed: () {},
               icon: Icon(Icons.call),
-            ),
+            ),*/
+            IconButton(
+              isSelected: _isDark,
+              onPressed: () {
+                setState(() {
+                  _isDark = !_isDark;
+                });
+              },
+              icon: const Icon(Icons.wb_sunny_outlined),
+              selectedIcon: const Icon(Icons.brightness_2_outlined),),
             IconButton(
               onPressed: () {},
               icon: Icon(Icons.more_vert),

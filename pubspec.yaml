@@ -75,6 +75,8 @@ flutter:
     - assets/images/first.jpg
     - assets/images/sec.jpg
     - assets/images/third.jpg
+    - assets/images/mylog.jpg
+    - assets/images/textlogo.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
