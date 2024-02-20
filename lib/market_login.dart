@@ -74,7 +74,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
       /*const Color.fromRGBO(0, 228, 236, 0.2)*/
     final ButtonStyle buttomStyle =
-        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 14),foregroundColor: Colors.white,backgroundColor:const Color.fromRGBO(0, 228, 236, 0.2) ,side: const BorderSide(width: 2,color: Color.fromRGBO(121, 0, 0, 1.0)));
+        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 14),foregroundColor: Colors.white,backgroundColor:const Color.fromRGBO(
+            0, 228, 236, 0.15) ,side: const BorderSide(width: 2,color: Color.fromRGBO(121, 0, 0, 1.0)));
    /* final TextStyle testStyle =
     ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 14),foregroundColor: Colors.white,backgroundColor:const Color.fromRGBO(0, 228, 236, 0.2) ,side: const BorderSide(width: 2,color: Color.fromRGBO(121, 0, 0, 1.0)));*/
     return Stack(
@@ -119,6 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     ElevatedButton(
+                      clipBehavior:Clip.hardEdge ,
                       style: buttomStyle,
                       onPressed: () {
                         Navigator.push(
