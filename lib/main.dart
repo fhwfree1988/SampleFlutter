@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'market_main.dart' as mainPage;
 
 /*void main() {
   runApp(const MyApp());
@@ -11,10 +12,11 @@ void main() {
     home: MyApp(),
   ));
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  /*const MyApp({super.key});*/
 
+  /*const MyApp({super.key});*/
 
   // This widget is the root of your application.
   @override
@@ -65,206 +67,98 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  TextEditingController nameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle style =
-    ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      /*body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times: here:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+      /*const Color.fromRGBO(0, 228, 236, 0.2)*/
+    final ButtonStyle buttomStyle =
+        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 14),foregroundColor: Colors.white,backgroundColor:const Color.fromRGBO(
+            0, 228, 236, 0.15) ,side: const BorderSide(width: 2,color: Color.fromRGBO(121, 0, 0, 1.0)));
+   /* final TextStyle testStyle =
+    ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 14),foregroundColor: Colors.white,backgroundColor:const Color.fromRGBO(0, 228, 236, 0.2) ,side: const BorderSide(width: 2,color: Color.fromRGBO(121, 0, 0, 1.0)));*/
+    return Stack(
+      children: <Widget>[
+        Image.asset(
+          "assets/images/third.jpg",
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          fit: BoxFit.cover,
         ),
-      ),*/
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: 16),
-            const SizedBox(
-              width: 300,
-              child: Text('Flutter\'s algorithms for rebuilding and '
-                  'repainting widgets are linear in the worst case, '
-                  'and typically sub-linear. Try clicking one of '
-                  'buttons below -- they\'ll tell you exactly '
-                  'when they rebuild!'),
-            ),
-            const SizedBox(height: 16),
-            const ClickyBuilder(),
-            const SizedBox(height: 16),
-            const ClickyBuilder(),
-            const SizedBox(height: 16),
-            const ClickyBuilder(),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              style: style,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SecondRoute()),
-                );
-              },
-              child: const Text('Open route'),
-            ),
-          ],
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Align(
+            alignment: Alignment.topLeft,
+            child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.all(5),
+                      child: TextField(
+                        style:TextStyle(color: Colors.white),
+                        controller: nameController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'User Name',
+                          hintText: 'Enter Your Name',
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(5),
+                      child: TextField(
+                        style:TextStyle(color: Colors.white),
+                        controller: passwordController,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Password',
+                          hintText: 'Enter Password',
+                        ),
+                      ),
+                    ),
+                    ElevatedButton(
+                      clipBehavior:Clip.hardEdge ,
+                      style: buttomStyle,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const mainPage.MyApp()),
+                        );
+                      },
+                      child: const Text('Log In'),
+                    ),
+                    /*ElevatedButton(
+                      style: ButtonStyle(foregroundColor:MaterialStateColor.resolveWith((states) => Colors.white) ,backgroundColor: MaterialStateColor.resolveWith((states) => Colors.blue)),
+                      child: Text('Sign In'),
+                      onPressed: () {
+                      },
+                    )*/
+                  ],
+                ))
+            /*Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  style: buttomStyle,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const mainPage.MyApp()),
+                    );
+                  },
+                  child: const Text('Log In'),
+                ),
+              ],
+            ),*/
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ],
     );
   }
-}
-class ClickyBuilder extends StatefulWidget {
-  const ClickyBuilder({Key? key}) : super(key: key);
-
-  @override
-  ClickyBuilderState createState() => ClickyBuilderState();
-}
-
-class ClickyBuilderState extends State<ClickyBuilder> {
-  Color color = Colors.blue;
-
-  String pad(int i) => i.toString().padLeft(2, '0');
-
-  @override
-  Widget build(BuildContext context) {
-    final now = DateTime.now();
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(backgroundColor: color),
-      child: Text('Built at ${now.hour}:${pad(now.minute)}:'
-          '${pad(now.second)}'),
-      onPressed: () => setState(() {
-        color = getRandomColor();
-      }),
-    );
-  }
-}
-
-class SecondRoute extends StatelessWidget {
-  const SecondRoute({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final ButtonStyle style =
-    ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Second Route'),
-      ),
-      body: Center(
-        child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ElevatedButton(
-                style: style,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const ThirdRoute()),
-                  );
-                },
-                child: const Text('Open route'),
-              ),
-              const SizedBox(height: 16),
-             ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('Go back!'),
-            ),
-      ]
-        )
-      ),
-    );
-  }
-}
-class ThirdRoute extends StatelessWidget {
-  const ThirdRoute({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Third Route'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Go back!'),
-        ),
-      ),
-    );
-  }
-}
-final rng = Random();
-
-const randomColors = [
-  Colors.blue,
-  Colors.green,
-  Colors.red,
-  Colors.orange,
-  Colors.indigo,
-  Colors.deepPurple,
-  Colors.white10,
-];
-
-Color getRandomColor() {
-  return randomColors[rng.nextInt(randomColors.length)];
 }

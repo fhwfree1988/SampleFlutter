@@ -8,3 +8,18 @@ Images:
 ----------------------------------------
 https://www.vectorstock.com/royalty-free-vector/wok-noodles-neon-logo-chinese-take-out-box-vector-22660738
 https://depositphotos.com/
+
+
+
+
+-----------------------------------------
+commands:
+-----------------------------------------
+flutter build apk -t lib/market_login.dart
+flutter build apk --release
+flutter build appbundle
+flutter doctor
+flutter config --android-sdk D:\Foad\AndroidSDK
+.\gradlew.bat
+./gradlew build
+./gradlew build --refresh-dependencies
