@@ -23,3 +23,10 @@ flutter config --android-sdk D:\Foad\AndroidSDK
 .\gradlew.bat
 ./gradlew build
 ./gradlew build --refresh-dependencies
+
+
+---------------------------------------
+VPN - CICD
+---------------------------------------
+https://github.com/bepass-org/oblivion
+https://github.com/bepass-org/oblivion/blob/main/.github/workflows/release.yaml

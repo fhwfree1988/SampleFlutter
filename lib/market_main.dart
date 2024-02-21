@@ -1,7 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'market_about.dart' as aboutPage;
 
 /*
 void main() {
@@ -94,6 +94,7 @@ class _MyApp extends State<MyHomePage> {
   int _selectedIndex = 0;
   bool _isSearchOff = true;
   bool _isDark = true;
+
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -121,12 +122,71 @@ class _MyApp extends State<MyHomePage> {
       _isSearchOff = !_isSearchOff;
     });
   }
+
+  Widget _image_logo(){
+    double screenheight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    Widget child = Container(
+      width: 80,
+      height: 80,
+      decoration: BoxDecoration(boxShadow: const [
+        BoxShadow(
+          color: Colors.orange,
+          blurRadius: 10.0,
+          spreadRadius: 0.0,
+          offset: Offset(
+              0.0, 0.0), // shadow direction: bottom right
+        )
+      ], borderRadius: BorderRadius.circular(20)),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Image.asset(
+          'assets/images/mylog.jpg',
+          fit: BoxFit.contain,
+          width: (screenWidth * 0.1 > 70 ? screenWidth * 0.1 : 70),
+          height: (screenWidth * 0.1 > 70 ? screenWidth * 0.1 : 70),
+        ),
+      ),
+    );
+    return child;
+  }
+  Widget _logo(/*BuildContext context*/) {
+    double screenheight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    Widget child;
+    //if (condition) {
+      child = Container(
+        //width: (screenWidth * 0.3 > 170 ? screenWidth * 0.3 : 170),//200
+        //height: (screenWidth * 0.3 > 170 ? screenWidth * 0.3 : 170) * 0.3,//80
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Image.asset(
+            'assets/images/textlogo.jpg',
+            fit: BoxFit.contain,
+            width: (screenWidth * 0.3 > 150 ? (screenWidth * 0.3 <300?screenWidth * 0.3:300): 150) ,//300,
+            height: (screenWidth * 0.3 > 190 ? (screenWidth * 0.3 <300?screenWidth * 0.3:300) : 190) * 0.3,//100,
+          ),
+        ),
+      );
+   /* } else {
+      child = ...
+    }*/
+    return new Container(child: child);
+  }
   @override
   Widget build(BuildContext context) {
-    MediaQuery.of(context); // Trigger rebuild when window is resized. This updates the bounding box sizes.
+    // Trigger rebuild when window is resized. This updates the bounding box sizes..
+    MediaQuery.of(context);
+    const int mobileWidth = 480;
+    const int tabletWidth = 900;
+    const int desktopWidth = 1180;
+    double screenheight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
    /* final image = Image.asset(exampleImagePath, key: _imageKey);
     // Yes, we call this every time the widget rebuilds, so we update our understanding of the image size.
     WidgetsBinding.instance.addPostFrameCallback(_updateImageSize);*/
+
     final ThemeData themeData = ThemeData(
         useMaterial3: true,
         brightness: _isDark ? Brightness.dark : Brightness.light);
@@ -216,59 +276,14 @@ class _MyApp extends State<MyHomePage> {
                   fit: BoxFit.contain,
                   height: 80,
                 ),
-              ),
-              SizedBox(width: 30.0),
-              ClipRRect(
-                *//*borderRadius: BorderRadius.circular(75.0),*//*
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(15),
-                  bottomRight:Radius.circular(15),
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
-                ),
-                child: Image.asset(
-                  'assets/images/first.jpg',
-                  fit: BoxFit.contain,
-                  height: 80,
-                ),
-              ),
-              SizedBox(width: 30.0),*/
-              Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(boxShadow: const [
-                  BoxShadow(
-                    color: Colors.orange,
-                    blurRadius: 10.0,
-                    spreadRadius: 0.0,
-                    offset: Offset(
-                        0.0, 0.0), // shadow direction: bottom right
-                  )
-                ], borderRadius: BorderRadius.circular(20)),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    'assets/images/mylog.jpg',
-                    fit: BoxFit.contain,
-                    height: 80,
-                  ),
-                ),
-              ),
-              Container(
-                width: 200,
-                height: 80,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    'assets/images/textlogo.jpg',
-                    fit: BoxFit.contain,
-                    height: 100,
-                    width: 300,
-                  ),
-                ),
-              ),
+              ),*/
+
+              if (screenWidth < 250) ...[] else ...[_image_logo()],
+              SizedBox(width: 10.0),
+              if (screenWidth < 400) ...[] else ...[_logo()],
               /*Container(
-                  padding: const EdgeInsets.all(8.0), child: Text('Shop Page'))*/
+                padding: const EdgeInsets.all(8.0), child: Text('Shop Page'))*/
+
             ],
 
           ),
@@ -293,17 +308,21 @@ class _MyApp extends State<MyHomePage> {
               },
               icon: const Icon(Icons.wb_sunny_outlined),
               selectedIcon: const Icon(Icons.brightness_2_outlined),),
-            IconButton(
+            /*IconButton(
               onPressed: () {},
               icon: Icon(Icons.more_vert),
-            ),
+            ),*/
           ],
           foregroundColor: Color.fromRGBO(255, 255, 255, 1.0),
           backgroundColor: Color.fromRGBO(14, 0, 0, 1.0),
         ),
         body: GridView.builder(
-          gridDelegate: /*SliverGridDelegateWithFixedCrossAxisCount*/
-              CustomGridDelegate(dimension: 240.0),
+          /*gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 8.0,
+          mainAxisSpacing: 8.0,
+        ),*/
+          gridDelegate: CustomGridDelegate(dimension: 240.0),
           itemCount: products.length,
           itemBuilder: (BuildContext context, int index) {
             return ProductCard(product: products[index]);
@@ -333,7 +352,7 @@ class _MyApp extends State<MyHomePage> {
                   Navigator.pop(context);
                 },
               ),
-              ListTile(
+              /*ListTile(
                 title: const Text('Business'),
                 selected: _selectedIndex == 1,
                 onTap: () {
@@ -342,15 +361,17 @@ class _MyApp extends State<MyHomePage> {
                   // Then close the drawer
                   Navigator.pop(context);
                 },
-              ),
+              ),*/
               ListTile(
-                title: const Text('School'),
+                title: const Text('About'),
                 selected: _selectedIndex == 2,
                 onTap: () {
-                  // Update the state of the app
-                  _onItemTapped(2);
-                  // Then close the drawer
-                  Navigator.pop(context);
+                  //Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const aboutPage.MyApp()),
+                  );
                 },
               ),
             ],
@@ -387,7 +408,6 @@ class ProductCard extends StatelessWidget {
   final Product product;
 
   ProductCard({required this.product});
-
   @override
   Widget build(BuildContext context) {
     return Card(
