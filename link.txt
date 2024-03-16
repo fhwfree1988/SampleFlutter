@@ -1,7 +1,8 @@
 https://stackoverflow.com/questions/50215334/stack-on-working-as-expected-z-index-css-equivalent
 https://api.flutter.dev/flutter/material/AppBar-class.html
 https://stackoverflow.com/questions/61578597/best-way-to-add-a-shadow-and-colored-border-to-cliprrect-using-flutter
-
+------------------------------------------
+https://stackoverflow.com/questions/65630743/how-to-solve-flutter-web-api-cors-error-only-with-dart-code
 
 --------------------------------------
 Images:
