@@ -14,9 +14,14 @@ Future<http.Response> fetchFood() {
   return http.get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
 }*/
 
+//---------Setting environment variables in Flutter-----------
+// flutter run --dart-define=API_ENDPOINT=http://localhost:8080
+
 Future<Food> addFood(String title,int cost) async {
+  const API_ENDPOINT = String.fromEnvironment('API_ENDPOINT', defaultValue: '');
+
   final response = await http.post(
-    Uri.parse('http://localhost:8080/food/add'),
+    Uri.parse('$API_ENDPOINT/food/add'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
